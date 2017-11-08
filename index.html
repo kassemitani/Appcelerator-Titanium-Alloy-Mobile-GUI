@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+    	<title>Titanium Mobile UI Studio</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="3rd/jquery.tmpl.min.js"></script>
+		<script type="text/javascript" src="3rd/underscore-min.js"></script>
+	    <script type="text/javascript" src="3rd/zeroclipboard/ZeroClipboard.js"></script>
+	    <script type="text/javascript" src="3rd/colorpicker.js"></script>
+		<script type="text/javascript" src="src/utils.js"></script>
+		<link rel="stylesheet" href="3rd/overcast/jquery-ui-1.8.9.custom.css">
+		<link rel="stylesheet" href="3rd/colorpicker/css/colorpicker.css">
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<div id="loading">Loading...</div>
+
+		<script id="mainTemplate" type="text/x-jquery-tmpl">
+<div class="library ui-widget-header">
+	<ul>
+		<li><div class="libControl" data-libType="Label">Label</div></li>
+		<li><div class="libControl" data-libType="TextField">Text field</div></li>
+		<li><div class="libControl" data-libType="TextArea">Text area</div></li>
+		<li><div class="libControl" data-libType="Switch">Switch</div></li>
+		<li><div class="libControl" data-libType="Button">Button</div></li>
+		<li><div class="libControl" data-libType="SearchBar">Search bar</div></li>
+	</ul>
+	<div class="buttons">
+		<button id="showLibrary">Library</button>
+		<button id="generate">Generate</button>
+		<button id="run">Run</button>
+	</div>
+</div>
+<div id="propertiesContainer" class="properties ui-widget-content">
+</div>
+		</script>
+		<script id="propertiesTemplate" type="text/x-jquery-tmpl">
+			<div>
+				<button id="highlightActive">Highlight</button>
+				<button id="removeActive">Remove</button>
+				<ul class="propertiesList ui-widget">
+				{{tmpl({properties: properties, events: events, libData: libData, propertiesData: propertiesData}) 'propertiesList'}}
+				{{each interfaces}}
+					<li>
+						<h3 class="interfaceName clickable ui-widget-header ui-state-default">${$value}</h3>
+						<ul class="interfaceList">
+							{{tmpl({properties: interfacesData[$value].properties, events: interfacesData[$value].events, libData: libData, propertiesData: propertiesData}) 'propertiesList'}}
+						</ul>
+					</li>
+				{{/each}}
+				</ul>
+			</div>
+		</script>
+		<script id='propertiesListTemplate' type='text/x-jquery-tmpl'>
+			{{each properties}}
+				{{tmpl({propertyName: $index, propertyType: $value, propertyValue: libData.control[$index], propertiesData: propertiesData}) 'property'}}
+			{{/each}}
+			{{each events}}
+				{{tmpl({eventName: $value, eventValue: libData.events[$value] ? libData.events[$value].text : ''}) 'event'}}
+			{{/each}}
+		</script>
+		<script id="propertyTemplate" type="text/x-jquery-tmpl">
+			<li class="ui-helper-clearfix">
+				<div class="propertyName">${propertyName}</div>
+				{{tmpl({name: propertyName, value: propertyValue, propertyType: propertyType}) propertiesData[propertyType] == null ? "textProperty" : propertiesData[propertyType].template}}
+			</li>
+		</script>
+		<script id="eventTemplate" type="text/x-jquery-tmpl">
+			<li class="ui-helper-clearfix">
+				<div class="eventName">${eventName}</div>
+				<textarea class="event" name="${eventName}">{{html eventValue}}</textarea>
+			</li>
+		</script>
+		<script id="textPropertyTemplate" type="text/x-jquery-tmpl">
+			<input class="property" data-propertyType="${propertyType}" type="text" name="${name}" value="${value}"/>
+		</script>
+		<script id="boolPropertyTemplate" type="text/x-jquery-tmpl">
+			<input class="property" data-propertyType="${propertyType}" type="checkbox" name="${name}" ${value == true ? 'checked="checked"' : ''} />
+		</script>
+		<script id="colorPropertyTemplate" type="text/x-jquery-tmpl">
+			<input class="property" data-propertyType="${propertyType}" type="text" name="${name}" ${value == true ? 'checked="checked"' : ''} />
+			<div class="colorPickerIcon"></div>
+		</script>
+		<script id="sizePropertyTemplate" type="text/x-jquery-tmpl">
+			<input class="property" data-propertyType="${propertyType}" data-size="width" type="text" name="${name}"  value="${value.width}" />
+			<div class="floating">x</div>
+			<input class="property" data-propertyType="${propertyType}" data-size="height" type="text" name="${name}"  value="${value.height}" />
+		</script>
+		<script id="generatorTemplate" type="text/x-jquery-tmpl">
+			<div>
+				<button id="copyGenerator">Copy</button>
+				<textarea id="generator"></textarea>
+			</div>
+		</script>
+		<script id="showLibraryTemplate" type="text/x-jquery-tmpl">
+			<ol class="libraryItems">
+				{{each library}}
+					{{if $value != null}}
+						<li class="clickable" data-libId="${$value.libId}">${$value.typ}</li>
+					{{/if}}
+				{{/each}}
+			</ol>
+		</script>
+		<script id="runCodeTemplate" type="text/x-jquery-tmpl">
+			<div>
+			</div>
+		</script>
+		<script id="messageTemplate" type="text/x-jquery-tmpl">
+			<div class="message ${className} ui-corner-all">
+				<div class="closeButton ui-icon ui-icon-close"></div>
+				<div class="messageText">
+					{{if icon}}
+						<span class="ui-icon ${icon}"></span>
+					{{/if}}
+					${message}
+				</div>
+			</div>
+		</script>
+
+		<script type="text/javascript" src="titanium.js"></script>
+		<script type="text/javascript" src="src/controls.js"></script>
+		<script type="text/javascript" src="src/core.js"></script>
+	</body>
+</html>

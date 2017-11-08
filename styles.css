@@ -1,0 +1,112 @@
+body {
+	padding: 0;
+	margin: 0;
+	font-size: 12pt;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+.library, .canvas, .properties {
+	box-sizing: border-box;
+}
+
+.library {
+	position: absolute;
+	width: 100%;
+	height: 10%;
+	border: 1px solid black;
+	border-bottom: 0;
+	/*background-color: #BCBCBC;*/
+}
+
+.canvas {
+	position: absolute !important;
+	top: 10% !important;
+	height: 90% !important;
+	width: 40% !important;
+	border: 1px solid black !important;
+	background-color: white !important;
+	background-image: url("styles/bg_canvas.png") !important;
+	background-repeat: repeat !important;
+}
+
+.canvas.active {
+	/*border: 1px solid orange !important;*/
+}
+
+.library ul {
+	list-style: none;
+}
+
+
+.library ul li {
+	float: left;
+	margin: 0 0.1em;
+	cursor: pointer;
+}
+
+.library .libControl {
+	border:  2px solid orange;
+	padding: 0.1em 0.5em;
+	background-color: white;
+}
+
+.buttons {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	font-size: 1em;
+}
+
+#generator {
+	box-sizing: border-box;
+	width: 100%;
+	height: 30em;
+}
+
+.ui-draggable {
+	z-index: 100;
+}
+
+.properties {
+	position: absolute;
+	top: 10%;
+	left: 40%;
+	height: 90%;
+	width: 60%;
+	border: 1px solid black;
+	border-left: 0;
+	overflow: auto;
+}
+
+.properties ul {
+	list-style: none;
+}
+
+.properties .propertyName,
+.properties .eventName {
+	float: left;
+	min-width: 15em;
+}
+
+ul.propertiesList {
+	padding:  0;
+	margin:  1em;
+}
+
+.properties .interfaceName {
+	margin: 0.5em 0 0.1em 0;
+	padding:  0.1em 1em;
+}
+
+.properties input, .properties .floating {
+	float: left;
+}
+.properties .colorPickerIcon {
+	float: left;
+	width: 30px;
+	height: 30px;
+	background: url(3rd/colorpicker/images/select.png) center;
+}
