@@ -1,4 +1,4 @@
-# Appcelerator-Titanium-Alloy-Mobile-GUI
+# Appcelerator Titanium Alloy Mobile GUI
 Appcelerator Titanium Alloy Mobile GUI Drag Drop 
 
 ## Controls Supported:
