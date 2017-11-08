@@ -130,6 +130,51 @@ var interfaces = {
 };
 
 var controls = {
+	View: {
+		varPrefix: "vw",
+		factory: "<View",
+		create: function(left, top){
+			var args = {
+				left: left,
+				top: top
+			};
+			var el = Ti.UI.createView(args);
+			el.dom.readOnly = true;
+			el.height = 50;
+			el.width = 50;
+			el.backgroundColor = "black";
+			return {
+				control: el,
+				args: args
+			};
+		},
+		interfaces: ['DOMView', 'Clickable', 'Interactable', 'Touchable', 'Styleable', 'Positionable'],
+		properties: {
+			autocapitalization: 'bool',
+			editable: 'bool',
+			enabled: 'bool',
+			borderStyle: 'borderStyle',
+			backgroundDisabledImage: 'url',
+			backgroundDisabledColor: 'color',
+			clearButtonMode: 'text',
+			keyboardToolbar: 'keyboardToolbar',
+			keyboardToolbarColor: 'color',
+			keyboardToolbarHeight: 'int',
+			leftButton: 'leftButton',
+			leftButtonMode: 'leftButtonMode',
+			leftButtonPadding: 'int',
+			minimumFontSize: 'int',
+			paddingLeft: 'int',
+			paddingRight: 'int',
+			rightButton: 'rightButton',
+			rightButtonMode: 'rightButtonMode',
+			rightButtonPadding: 'int',
+			suppressReturn: 'bool',
+			verticalAlign: 'verticalAlign',
+			size: 'size'
+		},
+		events: ['blur', 'change', 'focus', 'return']
+	},
 	TextField: {
 		varPrefix: "tf",
 		factory: "<TextField",
